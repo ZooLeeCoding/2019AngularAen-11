@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ObservableExampleService } from '../observable-example.service';
 
 @Component({
   selector: 'app-hello',
@@ -8,9 +9,11 @@ import { Router } from '@angular/router';
 })
 export class HelloComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, 
+    private observableExample: ObservableExampleService) { }
 
   ngOnInit() {
+    this.observableExample.callObserver();
   }
 
   toggleNavigate() {
