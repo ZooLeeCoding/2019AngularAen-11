@@ -66,13 +66,25 @@ export class ObservableExampleService {
   callObserver() {
     //this.myObservable.subscribe(this.myObserver);
 
-    const gyumolcs = new Observable(this.fruitSeller);
+    /*const gyumolcs = new Observable(this.fruitSeller);
     gyumolcs.subscribe(data => 
       console.log("Inline observer adatot kapott", data),
       error => console.log("Inline observer hibat kapott", error),
-      () => console.log("Inline observer végzett"));
+      () => console.log("Inline observer végzett"));*/
 
-    gyumolcs.subscribe(this.myObserver);
+    //gyumolcs.subscribe(this.myObserver);
+
+    const multicastVasarlas = new Observable(this.multicasting());
+    multicastVasarlas.subscribe({
+      next(data) { console.log("Az 1. observer adatot kapott", data) },
+      complete() { console.log("Az 1. observer veget ert") }
+    })
+    setTimeout(() => {
+      multicastVasarlas.subscribe({
+        next(data) { console.log("A 2. observer adatot kapott", data) },
+        complete() { console.log("A 2. observer veget ert") }
+      })
+    }, 3000)
   }
 
 
